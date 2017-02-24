@@ -18,15 +18,10 @@ namespace suite_cpp {
      */
     class Loop {
     public:
-        bool _running;
-        
-        inline bool running() {
-            return _running;
-        }
         /**
          *  Constructor
          */
-        Loop() : _running(false) {}
+        Loop() {}
         
         /**
          * Cannot be copied
@@ -90,12 +85,18 @@ namespace suite_cpp {
     /**
      *  Class definition
      */
-    class EventLoop : public Loop, public EventCallback {
+    class EventLoop : public Loop, public EventCallback, EventSourceOperator {
+    private:
+        struct Private;
+        std::shared_ptr<Private> impl;
+        void iteration();
+        bool containsSource(EventSource *source) const;
+        
     public:
         /**
          *  Constructor
          */
-        EventLoop() : Loop() {}
+        EventLoop();// : Loop() {}
         
         /**
          *  Destructor
@@ -104,23 +105,31 @@ namespace suite_cpp {
         
         // ---------------------------- implement Loop ------------------------------
         
-        virtual bool run();
-        virtual bool step(bool block = true);
-        virtual bool stop();
-        virtual void suspend();
-        virtual void resume();
+        virtual bool run() override;
+        virtual bool step(bool block = true) override;
+        virtual bool stop() override;
+        virtual void suspend() override;
+        virtual void resume() override;
         
         // ----------------------- implement EventCallback ---------------------------
-        virtual void onMessage(int eventId, const MessageCallback &callback) = 0;
         
-        virtual void onReadable(int fd, const ReadCallback &callback) = 0;
-        virtual void onWritable(int fd, const WriteCallback &callback) = 0;
+        virtual void onMessage(int eventId, const MessageCallback &callback) override;
         
-        virtual void onTimeout(long timeout, const TimeoutCallback &callback) = 0;
+        virtual void onReadable(int fd, const ReadCallback &callback) override;
+        virtual void onWritable(int fd, const WriteCallback &callback) override;
         
-        virtual void onSynchronize(const SynchronizeCallback &callback) = 0;
+        virtual void onTimeout(long timeout, const TimeoutCallback &callback) override;
         
-        virtual void onCleanup(const CleanupCallback &callback) = 0;
+        virtual void onSynchronize(const SynchronizeCallback &callback) override;
+        
+        virtual void onCleanup(const CleanupCallback &callback) override;
+        
+        // --------------------- implement EventSourceOperator ----------------------
+        
+        virtual bool addEventSource(EventSource *source, EventHandler handler = nullptr) override;
+        virtual bool setSourceHandler(EventSource *source, EventHandler handler) override;
+        virtual bool removeEventSource(EventSource *source) override;
+        
     };
 }
 

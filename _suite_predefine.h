@@ -9,6 +9,7 @@
 #ifndef _suite_predefine_h
 #define _suite_predefine_h
 
-
+#undef  TODO
+#define TODO( X ) _Pragma(macro_cstr("TODO: " X))
 
 #endif /* _suite_predefine_h */

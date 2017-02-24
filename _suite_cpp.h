@@ -12,6 +12,10 @@
 //#include "network.ftp/ftplib.h"
 #include "network.ftp/include/ftpClient.h"
 
-#include "support.event/event.hpp"
+#include "support.event/_event_loop.hpp"
+#include "support.event/source/_file_source.hpp"
+#include "support.event/source/_timeout_source.hpp"
+#include "support.event/source/_signal_source.hpp"
+#include "support.event/source/_ticker_source.hpp"
 
 #endif /* _suite_cpp_h */
