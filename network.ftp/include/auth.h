@@ -7,10 +7,8 @@
 
 using namespace std;
 
-class auth
-{
-	struct userInfo
-	{
+class auth {
+	struct userInfo {
 		string username;
 		string password;
 		string directory;

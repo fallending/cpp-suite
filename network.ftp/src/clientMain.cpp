@@ -13,31 +13,25 @@
 
 using namespace std;
 
-int ftp_client_main(int argc, char* argv[])
-{
+int ftp_client_main(int argc, char* argv[]) {
 	string hostname;
 	unsigned short port = 21;
 	
-	if(argc<2)
-	{
+	if(argc < 2) {
 		printf("Specify hostname\n");
 		return 0;
 	}
 	
 	hostname = string(argv[1]);
 	
-	if(argc>2)
-	{
-		if(strlen(argv[2]) > 5)
-		{
+	if(argc>2) {
+		if(strlen(argv[2]) > 5) {
 			printf("Invalid Port\n");
 			return 0; 
 		}
 		port = 0;
-		for(int i=0; i<strlen(argv[2]); i++)
-		{
-			if(!isdigit(argv[2][i]))
-			{
+		for(int i=0; i<strlen(argv[2]); i++) {
+			if(!isdigit(argv[2][i])) {
 				printf("Invalid Port\n");
 				return 0;
 			}
@@ -47,22 +41,20 @@ int ftp_client_main(int argc, char* argv[])
 	
 	ftpClient client(hostname,port,cout);
 	
-	if(!client.connect())	printf("Unable to connect to Server\n");
-	else
-	{	
+    if(!client.connect()) {
+        printf("Unable to connect to Server\n");
+    } else {
 		char username[100],*password;
 	
-		do
-		{
+		do {
 			printf("Enter Username: ");
 			fgets(username, 100, stdin);
 			username[strlen(username)-1] = '\0';
 			client.sendUsername(username);
 			password = getpass("Enter Password: ");
-		}while(!client.sendPassword(password));
+		} while(!client.sendPassword(password));
 		
-		if(!client.setupDataPort())
-		{
+		if(!client.setupDataPort()) {
 			printf("Unable to setup data port\n");
 			return 0;
 		}
@@ -70,8 +62,7 @@ int ftp_client_main(int argc, char* argv[])
 		string cmd = "";
 		char buffer[100];
 		
-		while(true)
-		{
+		while(true) {
 			printf("ftp> ");
 			*buffer=0;
 			fgets(buffer, 100, stdin);

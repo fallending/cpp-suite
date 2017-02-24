@@ -19,10 +19,6 @@ namespace suite_cpp {
     }
     
     uint64_t TickerSource::timelast() {
-        uint64_t now = time_now();
-        
-        cout << _triggeredCount << "," << _duration << "," << _nextTrigger << "," << now << "\n";
-        
         return _triggeredCount * _duration;
     }
     

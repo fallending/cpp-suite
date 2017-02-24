@@ -12,8 +12,7 @@
 
 using namespace std;
 
-class ftpServer
-{
+class ftpServer {
 private:
 	unsigned short m_port;
 	tcpSocket m_control_sock;

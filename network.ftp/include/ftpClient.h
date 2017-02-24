@@ -12,8 +12,7 @@
 
 using namespace std;
 
-class ftpClient
-{
+class ftpClient {
 private:
 	unsigned short m_data_port;
 	unsigned short m_server_port;

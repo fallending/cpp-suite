@@ -7,8 +7,7 @@
 
 using namespace std;
 
-class ftpResponse
-{
+class ftpResponse {
 
 private:
 	int m_code;

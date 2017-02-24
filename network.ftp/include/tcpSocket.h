@@ -14,10 +14,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <unistd.h>
+
 using namespace std;
 
-class tcpSocket
-{
+class tcpSocket {
 private:
 	int m_sd;	//socket file descriptor
 	string m_dest_addr;

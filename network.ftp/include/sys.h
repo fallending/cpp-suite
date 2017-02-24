@@ -15,17 +15,14 @@
 
 using namespace std;
 
-namespace sys
-{
-	inline bool isRegularFile(string path)
-	{
+namespace sys {
+	inline bool isRegularFile(string path) {
 		struct stat s;
 		if (stat(path.c_str(), &s)!=0) return false;
 		return (bool) (s.st_mode & S_IFREG);
 	}
 
-	inline string pwd()
-	{
+	inline string pwd() {
 		char cwd[1024];
 		errno = 0;
 		getcwd(cwd, sizeof(cwd));
@@ -33,21 +30,18 @@ namespace sys
 		return string(cwd);	
 	}
 	
-	inline bool cd(string dir)
-	{
+	inline bool cd(string dir) {
 		return chdir(dir.c_str()) != -1;
 	}
 	
-	inline bool setRootDir(string dir)
-	{
+	inline bool setRootDir(string dir) {
 		errno = 0;
 		chroot(dir.c_str());
-		if(errno)	false;
+		if(errno) return false;
 		return true;
 	}
 	
-	inline string ls(string arg)
-	{
+	inline string ls(string arg) {
 		string cmd = "ls";
 		if(arg != "")	cmd += " " + arg;
 		
@@ -62,10 +56,8 @@ namespace sys
 		char buffer[1024];
 		stringstream fileList;
 		int n;
-		while((n=fread(buffer, 1, 1024, file))>0)
-		{
-			for (int i=0; i<n; i++)
-			{
+		while((n = (int)fread(buffer, 1, 1024, file)) > 0) {
+			for (int i=0; i<n; i++) {
 				if (buffer[i]=='\n') fileList<<'\r';
 				fileList<<buffer[i];
 			}
@@ -75,8 +67,7 @@ namespace sys
 		return fileList.str();
 	}
 	
-	inline string syst()
-	{
+	inline string syst() {
 		return string("UNIX");
 	}
 	
