@@ -1,2 +1,3 @@
-# suite.cplusplus
-code suite for cpp
+# C++ 工具包
+
+### 需要考虑跨平台
