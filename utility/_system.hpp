@@ -25,8 +25,7 @@ namespace suite_cpp {
                                                                          std::chrono::system_clock::now().time_since_epoch()).count();
         }
 
-#ifdef TARGET_OS_OSX
-        static inline char * ip() {
+        static inline char *ip() {
             char *local_ip = NULL;
             struct ifaddrs *addrs;
             if (getifaddrs(&addrs)==0) {
@@ -46,8 +45,7 @@ namespace suite_cpp {
             }
             return local_ip;
         }
-#endif
-        
+
     }
     
     
