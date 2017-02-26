@@ -14,7 +14,7 @@
 namespace suite_cpp {
     using namespace std;
     
-    TickerSource::TickerSource(int duration) : EventSource(), _duration(duration), _nextTrigger(time_now() + duration), _triggeredCount(0) {
+    TickerSource::TickerSource(int duration) : EventSource(), _duration(duration), _nextTrigger(system::time_now() + duration), _triggeredCount(0) {
         
     }
     
@@ -25,7 +25,7 @@ namespace suite_cpp {
     /////
     
     bool TickerSource::isReady() {
-        uint64_t now = time_now();
+        uint64_t now = system::time_now();
         if (now >= _nextTrigger) {
             _nextTrigger = _duration + _nextTrigger;
             

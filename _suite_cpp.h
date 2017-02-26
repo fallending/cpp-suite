@@ -10,7 +10,7 @@
 #define _suite_cpp_h
 
 //#include "network.ftp/ftplib.h"
-#include "network.ftp/include/ftpClient.h"
+//#include "network.ftp/include/ftpClient.h"
 
 #include "support.event/_event_loop.hpp"
 #include "support.event/source/_file_source.hpp"
